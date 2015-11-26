@@ -1,0 +1,72 @@
+<xs:schema xmlns="http://www.developframework.org/schema/jsonview"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.developframework.org/schema/jsonview"
+	elementFormDefault="qualified">
+	<xs:element name="jsonview-configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="jsonview-package">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="jsonview" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:group ref="elementGroup"></xs:group>
+									<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="namespace" type="xs:string" use="required"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="baseType">
+		<xs:group ref="elementGroup"></xs:group>
+		<xs:attributeGroup ref="attrGroup"></xs:attributeGroup>
+	</xs:complexType>
+	<xs:attributeGroup name="attrGroup">
+		<xs:attribute name="data" type="xs:string" use="required"></xs:attribute>
+		<xs:attribute name="alias" type="xs:string"></xs:attribute>
+		<xs:attribute name="with" type="xs:string"></xs:attribute>
+	</xs:attributeGroup>
+	<xs:group name="elementGroup">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="object">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="baseType"></xs:extension>
+						</xs:complexContent>
+						<xs:attribute name="type">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="virtual"/>
+    								<xs:enumeration value="entity"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="array">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="baseType"></xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="property">
+					<xs:complexType>
+						<xs:attributeGroup ref="attrGroup"></xs:attributeGroup>
+						<xs:attribute name="handler" type="xs:string"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="import">
+					<xs:complexType>
+						<xs:attribute name="namespace" type="xs:string"></xs:attribute>
+						<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+</xs:schema>

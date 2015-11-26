@@ -1,0 +1,27 @@
+<jsonview-configuration
+	xmlns="http://www.developframework.org/schema/jsonview" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.developframework.org/schema/jsonview 
+	http://www.developframework.org/schema/jsonview/jsonview-configuration-2.0.xsd">
+	<jsonview-package namespace="jsonview-default">
+		
+		<jsonview id="default-successview">
+			<property data="success"/>
+		</jsonview>
+		
+		<jsonview id="default-errorview">
+			<property data="success"/>
+			<property data="message"/>
+		</jsonview>
+		
+		<jsonview id="default-pagerview">
+			<object data="pagerinfo" with="$root">
+				<property data="index"/>
+				<property data="size"/>
+				<property data="total"/>
+				<property data="pageTotal"/>
+			</object>
+		</jsonview>
+	</jsonview-package>
+</jsonview-configuration>
+
